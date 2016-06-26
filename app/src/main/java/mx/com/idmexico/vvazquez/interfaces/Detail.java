@@ -15,6 +15,7 @@ public class Detail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_activity);
         EditText UserText = (EditText) findViewById(R.id.txtUserNameDetail);
+
         UserText.setText(getIntent().getExtras().getString("user_name_key"));
     }
 }

@@ -8,4 +8,7 @@
     <string name="error">Error</string>
     <string name="reg_adv">Registro requerido</string>
     <string name="login_adv">Inicio exitoso</string>
+    <string name="session">Última sesión</string>
+    <string name="logout">Salir</string>
+
 </resources>

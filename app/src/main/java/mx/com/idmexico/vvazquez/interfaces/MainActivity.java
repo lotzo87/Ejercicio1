@@ -58,9 +58,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (usuario.equals(modelUsr.get(0).getUser()) && contra.equals(modelUsr.get(0).getPassword())) {
                 Toast.makeText(getApplicationContext(), R.string.login_adv, Toast.LENGTH_SHORT).show();
                 Preferences p = new Preferences(getApplicationContext());
+                String last_session = p.getLastSession();
                 p.saveLastSession(String.valueOf(modelUsr.get(0).getId()), java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()));
                 Intent intent = new Intent(getApplicationContext(), DetailedActivity.class);
                 intent.putExtra("user_name_key", usuario);
+                //intent.putExtra("last_session", modelUsr.get(0).getLastsession());
+                intent.putExtra("last_session", last_session);
                 startActivity(intent);
             } else
                 Toast.makeText(getApplicationContext(), R.string.reg_adv, Toast.LENGTH_SHORT).show();

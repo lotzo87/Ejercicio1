@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import mx.com.idmexico.vvazquez.interfaces.Fragmentos.FragmentList;
 import mx.com.idmexico.vvazquez.interfaces.Fragmentos.FragmentProfile;
@@ -16,6 +17,7 @@ import mx.com.idmexico.vvazquez.interfaces.Fragmentos.FragmentProfile;
  */
 public class DetailedActivity extends AppCompatActivity implements View.OnClickListener{
     private String userName;
+    private TextView textView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,7 +25,10 @@ public class DetailedActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.detailed_activity);
         findViewById(R.id.btnFragmentoPerfil).setOnClickListener(this);
         findViewById(R.id.btnFragmentoLista).setOnClickListener(this);
+        findViewById(R.id.btnSalir).setOnClickListener(this);
+        textView = (TextView) findViewById(R.id.eSession);
         userName = getIntent().getExtras().getString("user_name_key");
+        textView.setText(getIntent().getExtras().getString("last_session"));
     }
 
     @Override
@@ -35,7 +40,14 @@ public class DetailedActivity extends AppCompatActivity implements View.OnClickL
             case (R.id.btnFragmentoLista):
                 showFragmentList();
                 break;
+            case (R.id.btnSalir):
+                deleteData();
+                break;
         }
+    }
+
+    private void deleteData() {
+        
     }
 
     private void showFragmentList() {
