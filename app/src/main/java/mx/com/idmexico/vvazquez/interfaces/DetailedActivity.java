@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import mx.com.idmexico.vvazquez.interfaces.Fragmentos.FragmentList;
 import mx.com.idmexico.vvazquez.interfaces.Fragmentos.FragmentProfile;
+import mx.com.idmexico.vvazquez.interfaces.Sql.UserDataSource;
+import mx.com.idmexico.vvazquez.interfaces.Util.Preferences;
 
 /**
  * Created by sistemas on 17/06/2016.
@@ -47,7 +49,11 @@ public class DetailedActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void deleteData() {
-        
+        Preferences p = new Preferences(getApplicationContext());
+        UserDataSource source = new UserDataSource(getApplicationContext());
+        p.deletePreferences();
+        source.deleteAll();
+        finish();
     }
 
     private void showFragmentList() {

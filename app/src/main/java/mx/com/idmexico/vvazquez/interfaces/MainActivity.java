@@ -5,6 +5,7 @@ import android.support.v4.app.*;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import mx.com.idmexico.vvazquez.interfaces.Util.Preferences;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText eUsuario;
     private EditText eContra;
+    private CheckBox chkPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.activity_main_registro).setOnClickListener(this);
         eUsuario = (EditText) findViewById(R.id.activity_main_usuario);
         eContra = (EditText) findViewById(R.id.activity_main_contrasenia);
+        chkPref = (CheckBox) findViewById(R.id.chkPref);
     }
 
     @Override
@@ -59,7 +62,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(getApplicationContext(), R.string.login_adv, Toast.LENGTH_SHORT).show();
                 Preferences p = new Preferences(getApplicationContext());
                 String last_session = p.getLastSession();
-                p.saveLastSession(String.valueOf(modelUsr.get(0).getId()), java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()));
+                if (chkPref.isChecked())
+                    p.saveCredentials(String.valueOf(modelUsr.get(0).getId()));
+                p.saveLastSession( java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()));
                 Intent intent = new Intent(getApplicationContext(), DetailedActivity.class);
                 intent.putExtra("user_name_key", usuario);
                 //intent.putExtra("last_session", modelUsr.get(0).getLastsession());

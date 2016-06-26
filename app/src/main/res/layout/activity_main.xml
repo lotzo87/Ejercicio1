@@ -23,6 +23,12 @@
         android:hint="@string/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <CheckBox
+        android:id="@+id/chkPref"
+        android:text="@string/remember"
+        android:layout_below="@id/activity_main_contrasenia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"

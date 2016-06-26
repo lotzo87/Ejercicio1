@@ -10,5 +10,6 @@
     <string name="login_adv">Inicio exitoso</string>
     <string name="session">Última sesión</string>
     <string name="logout">Salir</string>
+    <string name="remember">Recordar credenciales</string>
 
 </resources>

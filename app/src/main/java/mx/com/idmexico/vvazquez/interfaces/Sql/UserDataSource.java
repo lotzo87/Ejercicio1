@@ -37,6 +37,12 @@ public class UserDataSource {
                 new String[]{String.valueOf(modelUser.getId())});
     }
 
+    public void deleteAll()
+    {
+        db.delete(MyDbHelper.TABLE_USER_NAME,null,null);
+        db.delete(MyDbHelper.TABLE_ITEM_NAME, null, null);
+    }
+
     public List<ModelUser> getAllUsers()
     {
         List<ModelUser> modelUserList = new ArrayList<>();

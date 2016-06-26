@@ -18,13 +18,24 @@ public class Preferences {
         preferences = context.getSharedPreferences(FILE_NAME,Context.MODE_PRIVATE);
     }
 
-    public void saveLastSession(String id, String last_session)
+    public void saveLastSession(String last_session)
     {
         if (!last_session.equals(""))
             preferences.edit().putString("last_session", last_session).apply();
 
+    }
+
+    public void saveCredentials(String id)
+    {
         if (!id.equals(""))
             preferences.edit().putString("user_id", id).apply();
+    }
+
+
+    public void deletePreferences()
+    {
+        preferences.edit().putString("last_session", "").apply();
+        preferences.edit().putString("user_id", "").apply();
     }
 
     public String getLastSession()
