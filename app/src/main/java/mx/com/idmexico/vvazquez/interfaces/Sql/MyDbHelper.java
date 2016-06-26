@@ -18,7 +18,7 @@ public class MyDbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ITEM_DESC = "description";
     public static final String COLUMN_ITEM_RESOURCE = "resource_id";
 
-    private static final String CREATE_TABLE_ITEM = String.format("create table if not exists %s " +
+    private static final String CREATE_TABLE_ITEM = String.format("create table %s " +
             "(%s integer primary key autoincrement," +
             "%s text not null," +
             "%s text not null," +
@@ -32,11 +32,11 @@ public class MyDbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_SESSION = "LAST_SESSION";
     public static final String COLUMN_REM = "REMEMBER";
 
-    private static final String CREATE_TABLE_USER = String.format("create table if not exists %s" +
-            "(%s integer primary key autoincremant, " +
+    private static final String CREATE_TABLE_USER = String.format("create table %s" +
+            "(%s integer primary key autoincrement, " +
             "%s text not null, " +
             "%s text not null, "+
-            "%s datetime, " +
+            "%s text, " +
             "%s integer default 0)",TABLE_USER_NAME,COLUMN_USER_ID, COLUMN_USER,COLUMN_PWD, COLUMN_SESSION, COLUMN_REM );
 
     private static final String DELETE_TABLE_ITEM =
@@ -53,8 +53,8 @@ public class MyDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(TABLE_ITEM_NAME);
-        db.execSQL(TABLE_USER_NAME);
+        db.execSQL(CREATE_TABLE_ITEM);
+        db.execSQL(CREATE_TABLE_USER);
     }
 
     @Override

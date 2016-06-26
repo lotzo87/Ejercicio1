@@ -17,15 +17,25 @@ public class Preferences {
     {
         preferences = context.getSharedPreferences(FILE_NAME,Context.MODE_PRIVATE);
     }
-    public void saveUser(String last_session)
+
+    public void saveLastSession(String id, String last_session)
     {
         if (!last_session.equals(""))
             preferences.edit().putString("last_session", last_session).apply();
+
+        if (!id.equals(""))
+            preferences.edit().putString("user_id", id).apply();
     }
+
     public String getLastSession()
     {
-        String last_session=preferences.getString("last_session",null);
+        String last_session=preferences.getString("last_session","");
         return last_session;
-
     }
+
+    public String getUser(){
+        String user_id=preferences.getString("user_id","");
+        return user_id;
+    }
+
 }

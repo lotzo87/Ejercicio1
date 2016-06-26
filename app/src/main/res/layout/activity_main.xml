@@ -12,7 +12,7 @@
 
     <EditText
         android:id="@+id/activity_main_usuario"
-        android:hint="Usuario"
+        android:hint="@string/user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
@@ -20,7 +20,7 @@
         android:inputType="textPassword"
         android:layout_marginTop="16dp"
         android:layout_below="@+id/activity_main_usuario"
-        android:hint="Contraseña"
+        android:hint="@string/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <LinearLayout
@@ -36,8 +36,14 @@
             android:layout_height="wrap_content" />
         <Button
             android:layout_weight="1"
-            android:text="Ingresar"
+            android:text="@string/login"
             android:id="@+id/activity_main_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            android:layout_weight="1"
+            android:text="@string/register"
+            android:id="@+id/activity_main_registro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>

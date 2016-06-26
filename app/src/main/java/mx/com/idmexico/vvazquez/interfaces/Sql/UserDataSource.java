@@ -46,9 +46,27 @@ public class UserDataSource {
             int id = cursor.getInt(cursor.getColumnIndexOrThrow(MyDbHelper.COLUMN_USER_ID));
             String user=cursor.getString(cursor.getColumnIndexOrThrow(MyDbHelper.TABLE_USER_NAME));
             String pasword = cursor.getString(cursor.getColumnIndexOrThrow(MyDbHelper.COLUMN_PWD));
-            Date session = Date.valueOf(cursor.getString(cursor.getColumnIndexOrThrow(MyDbHelper.COLUMN_SESSION)));
+            String session = cursor.getString(cursor.getColumnIndexOrThrow(MyDbHelper.COLUMN_SESSION));
             int rem = cursor.getInt(cursor.getColumnIndexOrThrow(MyDbHelper.COLUMN_REM));
             ModelUser modelUser= new ModelUser(id, user, pasword, session, rem);
+            modelUserList.add(modelUser);
+        }
+        return modelUserList;
+    }
+
+    public List<ModelUser> getUser(String user, String password)
+    {
+        List<ModelUser> modelUserList = new ArrayList<>();
+        Cursor cursor =db.query(MyDbHelper.TABLE_USER_NAME, null,MyDbHelper.COLUMN_USER + "=? AND " + MyDbHelper.COLUMN_PWD + "=?",
+                new String[] {user, password},null,null,null,null);
+        while (cursor.moveToNext())
+        {
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow(MyDbHelper.COLUMN_USER_ID));
+            String usr=cursor.getString(cursor.getColumnIndexOrThrow(MyDbHelper.COLUMN_USER));
+            String pasword = cursor.getString(cursor.getColumnIndexOrThrow(MyDbHelper.COLUMN_PWD));
+            String session = cursor.getString(cursor.getColumnIndexOrThrow(MyDbHelper.COLUMN_SESSION));
+            int rem = cursor.getInt(cursor.getColumnIndexOrThrow(MyDbHelper.COLUMN_REM));
+            ModelUser modelUser= new ModelUser(id, usr, pasword, session, rem);
             modelUserList.add(modelUser);
         }
         return modelUserList;

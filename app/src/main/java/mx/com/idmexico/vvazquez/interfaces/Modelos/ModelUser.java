@@ -10,12 +10,12 @@ public class ModelUser {
     private int id;
     private String user;
     private String password;
-    private Date lastsession;
+    private String lastsession;
     private int remember;
 
 
 
-    public ModelUser(int id, String user, String password, Date lastsession, int remember) {
+    public ModelUser(int id, String user, String password, String lastsession, int remember) {
         this.id = id;
         this.user = user;
         this.password = password;
@@ -47,11 +47,11 @@ public class ModelUser {
         this.password = password;
     }
 
-    public Date getLastsession() {
+    public String getLastsession() {
         return lastsession;
     }
 
-    public void setLastsession(Date lastsession) {
+    public void setLastsession(String lastsession) {
         this.lastsession = lastsession;
     }
 

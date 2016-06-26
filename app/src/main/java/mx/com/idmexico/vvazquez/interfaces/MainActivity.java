@@ -8,6 +8,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Calendar;
+import java.util.List;
+
+import mx.com.idmexico.vvazquez.interfaces.Modelos.ModelUser;
+import mx.com.idmexico.vvazquez.interfaces.Sql.UserDataSource;
+import mx.com.idmexico.vvazquez.interfaces.Util.Preferences;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText eUsuario;
     private EditText eContra;
@@ -17,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findViewById(R.id.activity_main_login).setOnClickListener(this);
+        findViewById(R.id.activity_main_registro).setOnClickListener(this);
         eUsuario = (EditText) findViewById(R.id.activity_main_usuario);
         eContra = (EditText) findViewById(R.id.activity_main_contrasenia);
     }
@@ -28,25 +36,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.activity_main_login:
                 validaAcceso();
                 break;
+            case R.id.activity_main_registro:
+                registraUsuario();
         }
 
+    }
+
+    private void registraUsuario() {
+        Intent intent=new Intent(getApplicationContext(), RegisterActivity.class);
+        startActivity(intent);
     }
 
     private void validaAcceso() {
         final String usuario   = eUsuario.getText().toString();
         final String contra = eContra.getText().toString();
-        final String usr ="Victor";
-        final String pwd = "V1c70r";
-
-            if(usuario.equals(usr) && contra.equals(pwd))
-            {
-                Toast.makeText(getApplicationContext(),"Login",Toast.LENGTH_SHORT).show();
-                Intent intent= new Intent(getApplicationContext(), DetailedActivity.class);
-                intent.putExtra("user_name_key",usuario);
+        //final String usr ="Victor";
+        //final String pwd = "V1c70r";
+        UserDataSource usrSrc = new UserDataSource(getApplicationContext());
+        List<ModelUser> modelUsr = usrSrc.getUser(usuario, contra);
+        if (!modelUsr.isEmpty()) {
+            if (usuario.equals(modelUsr.get(0).getUser()) && contra.equals(modelUsr.get(0).getPassword())) {
+                Toast.makeText(getApplicationContext(), R.string.login_adv, Toast.LENGTH_SHORT).show();
+                Preferences p = new Preferences(getApplicationContext());
+                p.saveLastSession(String.valueOf(modelUsr.get(0).getId()), java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()));
+                Intent intent = new Intent(getApplicationContext(), DetailedActivity.class);
+                intent.putExtra("user_name_key", usuario);
                 startActivity(intent);
-            }
-            else
-                Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_SHORT).show();
+            } else
+                Toast.makeText(getApplicationContext(), R.string.reg_adv, Toast.LENGTH_SHORT).show();
+        }
+        else
+            Toast.makeText(getApplicationContext(), R.string.reg_adv, Toast.LENGTH_SHORT).show();
 
     }
 }
